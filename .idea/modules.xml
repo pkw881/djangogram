@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/InstProject.iml" filepath="$PROJECT_DIR$/.idea/InstProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/djangogram/.idea/djangogram.iml" filepath="$PROJECT_DIR$/djangogram/.idea/djangogram.iml" />
+    </modules>
+  </component>
+</project>
