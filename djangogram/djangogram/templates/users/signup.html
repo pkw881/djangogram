@@ -1,0 +1,41 @@
+{% extends "users/base.html" %}
+
+<h1>SignUp Page</h1>
+{% block title %}
+  sign up
+{% endblock title %}
+
+<form action = "{% url 'users:signup' %}", method="post">
+  {% csrf_token %}
+  {% for field in form %}
+  <div class="fieldWrapper">
+    {{ field.errors }}
+    {{ field }}
+    <p> </p>
+  </div>
+  {% endfor %}
+  <input type="submit" value="sign up">
+
+</form>
+
+<a href = "{% url 'users:main' %}">Login</a>
+
+{% block content %}
+<div class="auth">
+    <form action="{% url 'users:signup'%}" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {{ field }}
+        </div>
+        {% endfor %}
+        <input type="submit" value="Sign up">
+
+<a href="{% url 'users:main' %}">Login</a>
+    </form>
+</div>
+<div class="auth_link">
+    <a href="{% url 'users:main' %}">Login</a>
+</div>
+{% endblock content %}

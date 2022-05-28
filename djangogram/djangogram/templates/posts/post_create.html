@@ -1,0 +1,28 @@
+{## 포스트 크리에이트에서 베이스 html재사용할려고 블락 키워드 사용함#}
+{#뷰에서는 포스트 크리에이트 탬플릿 호출하고 있음 #}
+{#익스텐즈 이용해서 중복되는 코딩들 베이스에서 가져오고 #}
+{% extends "posts/base.html" %}
+
+{#요사이에 작성된 키워드가 베이스 템플릿 내 블락으로 들어가게 됨 #}
+{% block contents %}
+  <div class="posts-create">
+    <div>
+      Create Posts
+    </div>
+    <div class="form">
+      <form action="{% url 'posts:post_create' %}"
+            method="post"
+            enctype="multipart/form-data">
+{# 위에 저장해서 사용자 필드 보내는데, 파일전송시는 enctype 꼭 해줘야함 멀티파트 폼데이터로 #}
+{#        어떤 데이터 타입인지 명시하는것, 명시안하면, 파일개시가 안됨#}
+
+        {% csrf_token %}
+{#        뷰로 부터 폼을 넘겨받아 as_o\p로 자동으로 html테그가 되서, 우리의 폼 내부로 나옴 #}
+        {{ form.as_p }}
+{#        사용자가 섭밋 누르면 포스트 요청방식으로 url로 보내짐#}
+        <input type="submit" value="Create">
+      </form>
+    </div>
+
+  </div>
+{% endblock %}

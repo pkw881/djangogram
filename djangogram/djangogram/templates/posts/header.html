@@ -1,0 +1,37 @@
+{% load static %}
+<header>
+  <div class = "header-box">
+    <div class="main-img">
+      <a href="{% url 'posts:index' %}">
+        <i class="fa fa-desktop fa-3x" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="search">
+      <form action="{% url 'posts:post_search' %}" method="GET">
+        <input type="text" name="q" placeholder="Search">
+      </form>
+    </div>
+    <div class = "header-right">
+      <div>
+        <a href="{% url 'posts:post_create' %}">
+         <i class="fa fa-picture-o fa-3x" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div>
+        <a href="#">
+          <i class="fa fa-bookmark fa-3x" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+</header>

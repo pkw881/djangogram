@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href = "{% static 'css/users/main.css' %}">
+  <title> {% block title %}  {% endblock title %} Django Gram </title>
+</head>
+<body>
+  <div class="content">
+    {% block content %} {% endblock content %}
+    contents
+  </div>
+    {% include 'users/footer.html' %}
+</body>
+</html>

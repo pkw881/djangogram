@@ -1,0 +1,86 @@
+{% extends "posts/base.html" %}
+{% load static %}
+{% block contents %}
+
+Here is post main page
+{% for post in posts %}
+    <div class="post-box">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="profile">
+                {% if post.author.profile_photo != None %}
+                    <img class = "p_img" src="{{ post.author.profile_photo }}">
+                {% else %}
+                    <img class = "p_img" src="{% static 'images/posts/no_avatar.png' %}">
+                {% endif %}
+                <div>
+                    {{ post.author.username }}
+                </div>
+            </div>
+
+            <div class="icon">
+                {% if user.id == post.author.id  %}
+                  <a href = "{% url 'posts:post_delete' post.id %}">
+                    <i class="fa fa-trash-o fa1x"></i>
+                  </a>
+                  <a href = "{% url 'posts:post_update' post.id %}">
+                     <i class="fa fa-pencil fa1x"></i>
+                  </a>
+                {% endif %}
+            </div>
+
+        </div>
+
+        <!-- IMAGE -->
+        <img class="post-image" src="{{ post.image }}">
+        <p></p>
+        <!-- IMAGE-BUTTON -->
+        <button id ="like-button-{{ post.id }}" onclick="handleLikeClick(this.id)">
+          {% if user.id in post.image_likes %}
+              <i class="fa fa-heart fa-2x"></i>
+          {% else %}
+              <i class="fa fa-heart-o fa-2x"></i>
+          {% endif %}
+        </button>
+
+        <div class="desc-box">
+            <!-- IMAGE-DESCRIPTION -->
+            <div class="image-desc">
+                <b>{{ post.author.username }}</b>
+                {{ post.caption }}
+            </div>
+
+            <!-- COMMENT -->
+            <div class="comment">
+                {% for comment in post.comment_post %}
+                    <div id="comment-{{ comment.id }}">
+                        {{ comment.author.username }}
+                        {{ comment.contents }}
+                        {% if user.id == comment.author.id %}
+{#                          a tag를 통해서 comment delete 요청되게 함#}
+                          <a href="{% url 'posts:comment_delete' comment.id %}">
+                            <i class="fa fa-trash-o fa1x"></i>
+                          </a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- COMMENT INPUT -->
+        <div class="comment-input">
+{#          서버에 호출할 API주소인 url 주소를 엘리어스로 사용하기 #}
+{#          포스트 아이디는 뎃글 생성할 아이디에 같이 넣을 수 있게 시리얼라이져에서 포스트 키값 아이디 넘겨주니깐 이 데이터 템플릿에서 사용#}
+{#          커멘트 크리에이트 유알앨 작성#}
+          <form action="{% url 'posts:comment_create' post.id %}" method="post">
+            {% csrf_token %}
+{#            뷰에서 전달받은 코멘트 폼 그대로 입력#}
+            {{ comment_form }}
+            <input type="submit" value="Post">
+          </form>
+        </div>
+    </div>
+
+{% endfor %}
+
+{% endblock %}

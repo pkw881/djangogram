@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet", type="text/css", href="{% static 'css/posts/main.css' %}">
+  <link rel="stylesheet", type="text/css", href="{% static 'css/posts/header.css' %}">
+  <link rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/posts/main.css'%}">
+  <title>Title</title>
+</head>
+<body>
+  <div class="header">
+    {% include "posts/header.html" %}
+  </div>
+  <div>
+    {#템플릿에 블락 키워드를  넣어서 블락사이에 변경되는 템플릿 내용만 작성해주면 됨  #}
+{#  포스트 크리엣 호출하도록 중복되는 헤더, 개발화면에 따라 다양한 내용 넣기 가능#}
+    {% block contents %} {% endblock  %}
+  </div>
+  <script type="text/javascript" src = "{% static 'js/posts.js' %}"></script>
+</body>
+</html>
